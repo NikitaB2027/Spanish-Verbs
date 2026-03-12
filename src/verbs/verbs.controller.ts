@@ -1,10 +1,20 @@
-import { Controller, Post} from '@nestjs/common';
+
+import { Controller, Post, Body} from '@nestjs/common';
+
+import { VerbsService } from './verbs.service';
 
 @Controller('verbs')
 export class VerbsController {
-    
+    constructor(private readonly verbsService: VerbsService){}
+
     @Post()
-    addVerb(): any {
-        return 'Verb added';
+    addVerb(
+        @Body('tense') verbTense: string, 
+        @Body('mood') verbMood: string, 
+        @Body('description') verbDesc: string, 
+        @Body('conjugation') verbConj: string[], 
+        @Body('example') verbEx: string
+    ): any {
+        this.verbsService.insertProduct(verbTense, verbMood, verbDesc, verbConj, verbEx );
     }
 }

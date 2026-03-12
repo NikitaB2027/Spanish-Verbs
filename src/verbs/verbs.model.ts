@@ -2,7 +2,11 @@
 
 
 export class Verbs {
-    //WOOHOOOOOOOSDILGKNGDJLSDM
-    //asklgdjadshgbujos
-    constructor(){};
+    constructor(
+        public tense: string, 
+        public mood: string, 
+        public description: string, 
+        public conjugation: string[], 
+        public example: string
+    ){};
 }

@@ -15,6 +15,13 @@ export class VerbsController {
         @Body('conjugation') verbConj: string[], 
         @Body('example') verbEx: string
     ): any {
-        this.verbsService.insertProduct(verbTense, verbMood, verbDesc, verbConj, verbEx );
+        const generatedId=this.verbsService.insertProduct(
+            verbTense, 
+            verbMood, 
+            verbDesc, 
+            verbConj, 
+            verbEx 
+        );
+        return {id: generatedId};
     }
 }

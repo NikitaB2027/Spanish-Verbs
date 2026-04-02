@@ -1,15 +1,16 @@
-import { Controller, Get, Header} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
-//making the domain here
-@Controller() //could have like 'Spanish' 
+//these are like routers
+//your-domain.com/(prodcuts)
+@Controller()//if i put 'products' in the parenthesis, this code will show for my domain with products
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  //this only works with the correct domain (/spanish)
-  @Get()//an even smaller folder if you put something in here (/verbs)
-  @Header('Content-Type', 'text/html')//to specify the type of data we are sending back
-  getHello():{name:string} {
-    return {name: 'Max'};
+  //this will only work when it's with 
+  //your-domain.com/products/users
+  @Get()//put users as an example
+  getHello(): string {
+    return this.appService.getHello();
   }
 }

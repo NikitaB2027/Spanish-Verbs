@@ -1,12 +1,18 @@
+import * as mongoose from 'mongoose';
 
+export const VerbSchema = new mongoose.Schema({
+    tense: {type: String, required: true},
+    mood: {type: String, required: true},
+    description: {type: String, required: true},
+    conjugation: {type: [String], required: true},
+    example: {type: String, required: true},
+});
 
-
-export class Verbs {
-    constructor(
-        public tense: string, 
-        public mood: string, 
-        public description: string, 
-        public conjugation: string[], 
-        public example: string
-    ){};
+export interface Verb extends mongoose.Document{
+    id: string;
+    tense: string;
+    mood: string;
+    description: string; 
+    conjugation: string[];
+    example: string;
 }

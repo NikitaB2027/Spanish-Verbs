@@ -1,28 +1,50 @@
+import { Controller, Post, Body, Get, Param, Patch, Delete} from '@nestjs/common';
 
-import { Controller, Post, Body} from '@nestjs/common';
-
-import { VerbsService } from './verbs.service';
-
+import {VerbsService} from './verbs.service';
 @Controller('verbs')
-export class VerbsController {
+//what is an @control decorator?
+export class VerbsController{
     constructor(private readonly verbsService: VerbsService){}
-
+    
     @Post()
-    addVerb(
-        @Body('tense') verbTense: string, 
-        @Body('mood') verbMood: string, 
-        @Body('description') verbDesc: string, 
-        @Body('conjugation') verbConj: string[], 
-        @Body('example') verbEx: string
-    ): any {
-        const generatedId=this.verbsService.insertProduct(
-            verbTense, 
-            verbMood, 
-            verbDesc, 
-            verbConj, 
-            verbEx 
+    async addProduct(
+        @Body('title') prodTitle: string, 
+        @Body('description') prodDesc: string, 
+        @Body('price') prodPrice: number
+    ){
+        const generatedId= await this.productsService.insertProduct(
+            prodTitle, 
+            prodDesc, 
+            prodPrice
         );
-        return {id: generatedId};
+        return{id: generatedId}
     }
-    //AKJGNJIOKMLGAJOIPA:LMD
+    
+    @Get()
+    async getAllProducts(){
+        const products= await this.productsService.getProducts();
+        return products;
+    }
+    
+    @Get(':id')
+    getProduct(@Param('id') prodId: string){
+        return this.productsService.getSingleProduct(prodId);
+    }
+
+    @Patch(':id')
+    async updateProduct(
+        @Param('id') prodId: string, 
+        @Body('title') prodTitle: string, 
+        @Body('description') prodDesc: string, 
+        @Body('price') prodPrice: number
+    ){
+        await this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
+        return null;
+    }
+
+    @Delete(':id')
+    async removeProduct(@Param('id') prodId: string){
+        await this.productsService.deleteProduct(prodId);
+        return null;
+    }
 }

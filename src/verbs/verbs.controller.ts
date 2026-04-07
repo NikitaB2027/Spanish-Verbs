@@ -18,6 +18,8 @@ export class VerbsController{
             prodPrice
         );
         return{id: generatedId}
+        //GET INTO ITTTTTTT
+        //AGKLDM
     }
     
     @Get()

@@ -10,9 +10,8 @@ export class VerbsService {
 
    constructor(@InjectModel('Verb') private readonly verbModel: Model<Verb>){ }
 
-   async insertVerb(tense: string, mood: string, desc:string, conj: string[], ex: string) {
+   async insertVerb(mood: string, desc:string, conj: string[], ex: string) {
     const newVerb= new this.verbModel({
-        tense,
         mood,
         description: desc, 
         conjugation: conj,
@@ -20,7 +19,7 @@ export class VerbsService {
     });
     const result =await newVerb.save();
     console.log(result);
-    return result.id as string;
+    return result.tense as string;
    }
    
    
@@ -28,7 +27,6 @@ export class VerbsService {
    async getVerbs(){
     const verbs= await this.verbModel.find().exec();
     return verbs.map((verb)=>({
-        id: verb.id, 
         tense: verb.tense, 
         mood: verb.mood,
         description: verb.description, 
@@ -37,10 +35,9 @@ export class VerbsService {
     }));
    }
 
-   async getSingleVerb(verbId: string){
-    const verb = await this.findVerb(verbId);
+   async getSingleVerb(verbTense: string){
+    const verb = await this.findVerb(verbTense);
     return {
-        id: verb.id, 
         tense: verb.tense, 
         mood: verb.mood,
         description: verb.description, 
@@ -50,17 +47,13 @@ export class VerbsService {
    }
 
    async updateVerb(
-    verbId: string, 
-    tense: string, 
+    verbTense: string, 
     mood: string,
     desc: string, 
     conjugation: string[],
     example: string
 ){
-    const updatedVerb=await this.findVerb(verbId);
-    if(tense){
-        updatedVerb.tense= tense;
-    }
+    const updatedVerb=await this.findVerb(verbTense);
     if(mood){
         updatedVerb.mood= mood;
     }
@@ -76,15 +69,15 @@ export class VerbsService {
     updatedVerb.save();
    }
 
-   async deleteVerb(verbId: string){
-    const result =await this.verbModel.deleteOne({_id: verbId}).exec();
+   async deleteVerb(verbTense: string){
+    const result =await this.verbModel.deleteOne({tense: verbTense}).exec();
     console.log(result);
    }
 
-   private async findVerb(id:string): Promise<Verb>{
+   private async findVerb(tense:string): Promise<Verb>{
     let verb;
     try{
-        verb= await this.verbModel.findById(id);
+        verb= await this.verbModel.findByTense(tense);
     } catch (error) {
         throw new NotFoundException('Could not find verb.')
     }

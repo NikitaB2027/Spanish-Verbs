@@ -7,46 +7,48 @@ export class VerbsController{
     constructor(private readonly verbsService: VerbsService){}
     
     @Post()
-    async addProduct(
-        @Body('title') prodTitle: string, 
-        @Body('description') prodDesc: string, 
-        @Body('price') prodPrice: number
+    async addVerb(
+        @Body('mood') verbMood: string,
+        @Body('description') verbDesc: string, 
+        @Body('conjugation') verbConj: string[],
+        @Body('example') verbEx: string
     ){
-        const generatedId= await this.productsService.insertProduct(
-            prodTitle, 
-            prodDesc, 
-            prodPrice
+        const generatedTense= await this.verbsService.insertVerb(
+            verbMood,
+            verbDesc,
+            verbConj,
+            verbEx
         );
-        return{id: generatedId}
-        //GET INTO ITTTTTTT
-        //AGKLDM
+        return{tense: generatedTense}
+        
     }
     
     @Get()
-    async getAllProducts(){
-        const products= await this.productsService.getProducts();
-        return products;
+    async getAllVerbs(){
+        const verbs= await this.verbsService.getVerbs();
+        return verbs;
     }
     
-    @Get(':id')
-    getProduct(@Param('id') prodId: string){
-        return this.productsService.getSingleProduct(prodId);
+    @Get(':tense')
+    getVerb(@Param('tense') verbTense: string){
+        return this.verbsService.getSingleVerb(verbTense);
     }
 
-    @Patch(':id')
-    async updateProduct(
-        @Param('id') prodId: string, 
-        @Body('title') prodTitle: string, 
-        @Body('description') prodDesc: string, 
-        @Body('price') prodPrice: number
+    @Patch(':tense')
+    async updateVerb(
+        @Param('tense') verbTense: string, 
+        @Body('mood') verbMood: string, 
+        @Body('description') verbDesc: string, 
+        @Body('conjugation') verbConj: string[], 
+        @Body('example') verbEx: string
     ){
-        await this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
+        await this.verbsService.updateVerb(verbTense, verbMood, verbDesc, verbConj, verbEx);
         return null;
     }
 
-    @Delete(':id')
-    async removeProduct(@Param('id') prodId: string){
-        await this.productsService.deleteProduct(prodId);
+    @Delete(':tense')
+    async removeVerb(@Param('tense') verbTense: string){
+        await this.verbsService.deleteVerb(verbTense);
         return null;
     }
 }

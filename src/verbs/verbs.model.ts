@@ -1,7 +1,6 @@
 import * as mongoose from 'mongoose';
 
 export const VerbSchema = new mongoose.Schema({
-    tense: {type: String, required: true},
     mood: {type: String, required: true},
     description: {type: String, required: true},
     conjugation: {type: [String], required: true},
@@ -9,7 +8,6 @@ export const VerbSchema = new mongoose.Schema({
 });
 
 export interface Verb extends mongoose.Document{
-    id: string;
     tense: string;
     mood: string;
     description: string; 

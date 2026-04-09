@@ -14,3 +14,4 @@ export interface Verb extends mongoose.Document{
     conjugation: string[];
     example: string;
 }
+//ALKGNJSLKFN< MBGKNHJIALKFNGBIOPKG OPFWKML GDJ

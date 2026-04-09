@@ -11,7 +11,7 @@ export class VerbsController{
         @Body('mood') verbMood: string,
         @Body('description') verbDesc: string, 
         @Body('conjugation') verbConj: string[],
-        @Body('example') verbEx: string
+        @Body('example') verbEx: string[]
     ){
         const generatedTense= await this.verbsService.insertVerb(
             verbMood,
@@ -40,7 +40,7 @@ export class VerbsController{
         @Body('mood') verbMood: string, 
         @Body('description') verbDesc: string, 
         @Body('conjugation') verbConj: string[], 
-        @Body('example') verbEx: string
+        @Body('example') verbEx: string[]
     ){
         await this.verbsService.updateVerb(verbTense, verbMood, verbDesc, verbConj, verbEx);
         return null;

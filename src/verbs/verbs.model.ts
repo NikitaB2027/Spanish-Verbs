@@ -4,7 +4,7 @@ export const VerbSchema = new mongoose.Schema({
     mood: {type: String, required: true},
     description: {type: String, required: true},
     conjugation: {type: [String], required: true},
-    example: {type: String, required: true},
+    example: {type: [String], required: true},
 });
 
 export interface Verb extends mongoose.Document{
@@ -12,6 +12,6 @@ export interface Verb extends mongoose.Document{
     mood: string;
     description: string; 
     conjugation: string[];
-    example: string;
+    example: string[];
 }
 //ALKGNJSLKFN< MBGKNHJIALKFNGBIOPKG OPFWKML GDJ

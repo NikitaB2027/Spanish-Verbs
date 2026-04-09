@@ -10,7 +10,7 @@ export class VerbsService {
 
    constructor(@InjectModel('Verb') private readonly verbModel: Model<Verb>){ }
 
-   async insertVerb(mood: string, desc:string, conj: string[], ex: string) {
+   async insertVerb(mood: string, desc:string, conj: string[], ex: string[]) {
     const newVerb= new this.verbModel({
         mood,
         description: desc, 
@@ -51,7 +51,7 @@ export class VerbsService {
     mood: string,
     desc: string, 
     conjugation: string[],
-    example: string
+    example: string[]
 ){
     const updatedVerb=await this.findVerb(verbTense);
     if(mood){

@@ -10,8 +10,9 @@ export class VerbsService {
 
    constructor(@InjectModel('Verb') private readonly verbModel: Model<Verb>){ }
 
-   async insertVerb(mood: string, desc:string, conj: string[], ex: string[]) {
+   async insertVerb(tense: string, mood: string, desc:string, conj: string[], ex: string[]) {
     const newVerb= new this.verbModel({
+        tense,
         mood,
         description: desc, 
         conjugation: conj,
@@ -19,7 +20,7 @@ export class VerbsService {
     });
     const result =await newVerb.save();
     console.log(result);
-    return result.tense as string;
+    return result.tense;
    }
    //oh mannn
    
@@ -78,7 +79,7 @@ export class VerbsService {
    private async findVerb(tense:string): Promise<Verb>{
     let verb;
     try{
-        verb= await this.verbModel.findByTense(tense);
+        verb= await this.verbModel.findOne({tense}).exec();
     } catch (error) {
         throw new NotFoundException('Could not find verb.')
     }

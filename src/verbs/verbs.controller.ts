@@ -8,12 +8,14 @@ export class VerbsController{
     
     @Post()
     async addVerb(
+        @Body('tense') verbTense: string,
         @Body('mood') verbMood: string,
         @Body('description') verbDesc: string, 
         @Body('conjugation') verbConj: string[],
         @Body('example') verbEx: string[]
     ){
         const generatedTense= await this.verbsService.insertVerb(
+            verbTense,
             verbMood,
             verbDesc,
             verbConj,

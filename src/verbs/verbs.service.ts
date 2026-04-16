@@ -21,6 +21,7 @@ export class VerbsService {
     console.log(result);
     return result.tense as string;
    }
+   //oh mannn
    
    
 

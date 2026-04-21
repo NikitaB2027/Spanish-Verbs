@@ -22,9 +22,6 @@ export class VerbsService {
     console.log(result);
     return result.tense;
    }
-   //oh mannn
-   
-   //siadklngwjoes
    
 
    async getVerbs(){

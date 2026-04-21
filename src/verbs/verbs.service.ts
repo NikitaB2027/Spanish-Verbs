@@ -24,6 +24,7 @@ export class VerbsService {
    }
    //oh mannn
    
+   //siadklngwjoes
    
 
    async getVerbs(){

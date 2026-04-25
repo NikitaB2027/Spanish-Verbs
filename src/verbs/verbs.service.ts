@@ -35,6 +35,7 @@ export class VerbsService {
     }));
    }
 
+   //I got chatGPT's help on this part on the tab "tense"
    async getSingleVerb(verbTense: string){
     const verb = await this.findVerb(verbTense);
     return {
@@ -44,6 +45,18 @@ export class VerbsService {
         conjugation: verb.conjugation,
         example: verb.example
     };
+   }
+
+   async getVerbsByMood(mood: string){
+    const verbs= await this.verbModel.find({mood}).exec();
+
+    return verbs.map((verb)=>({
+         tense: verb.tense, 
+        mood: verb.mood,
+        description: verb.description, 
+        conjugation: verb.conjugation,
+        example: verb.example
+    }));
    }
 
    async updateVerb(

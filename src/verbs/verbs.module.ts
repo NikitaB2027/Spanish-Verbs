@@ -5,6 +5,7 @@ import {VerbsController} from './verbs.controller';
 import{VerbsService} from './verbs.service';
 import {VerbSchema} from './verbs.model';
 
+//I didn't really mess with this except for the verbs parts
 @Module({
     imports: [MongooseModule.forFeature([{name: 'Verb', schema: VerbSchema}])],
     controllers: [VerbsController],

@@ -30,7 +30,14 @@ export class VerbsController{
         const verbs= await this.verbsService.getVerbs();
         return verbs;
     }
+
+    //I got chatGPT's help for this part on tab "mood"
+    @Get('mood/:mood')
+    async getVerbsByMood(@Param('mood') verbMood: string){
+        return this.verbsService.getVerbsByMood(verbMood);
+    }
     
+    //I got chatGPT's help for this part on tab "tense"
     @Get(':tense')
     getVerb(@Param('tense') verbTense: string){
         return this.verbsService.getSingleVerb(verbTense);

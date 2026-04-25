@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+//this is the same as the video
 describe('AppController', () => {
   let appController: AppController;
 

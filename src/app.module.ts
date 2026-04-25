@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import {MongooseModule} from '@nestjs/mongoose';
 
+//this is the same as the video
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { VerbsModule } from './verbs/verbs.module';

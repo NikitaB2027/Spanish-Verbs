@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 
+//I got chatGPT's help for this part on tab "tense"
 export const VerbSchema = new mongoose.Schema({
     tense: { type: String, required: true, unique: true },
     mood: {type: String, required: true},
@@ -15,4 +16,3 @@ export interface Verb extends mongoose.Document{
     conjugation: string[];
     example: string[];
 }
-//ALKGNJSLKFN< MBGKNHJIALKFNGBIOPKG OPFWKML GDJ
